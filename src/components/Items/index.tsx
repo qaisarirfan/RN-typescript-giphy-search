@@ -1,5 +1,5 @@
 import { isEqual } from "lodash"
-import React, { memo, useCallback, useEffect, useState } from "react"
+import React, { memo, useCallback, useState } from "react"
 import {
   TouchableOpacity,
   Image,
@@ -90,10 +90,10 @@ const Items: React.FC<{ onRefresh: Function; onEndReached: Function }> = ({
         }}
         numColumns={2}
         data={ids}
-        renderItem={useCallback(({ item }) => {
-          const { img } = data[item] || {}
+        renderItem={({ item }) => {
+          const { img } = data[item] ?? {}
           return <MemoizedItem img={img} openPopup={() => openPopup(item)} />
-        }, [])}
+        }}
         keyExtractor={useCallback((item) => item, [])}
         onEndReached={() => onEndReached()}
         onRefresh={() => onRefresh()}
@@ -116,10 +116,10 @@ const Items: React.FC<{ onRefresh: Function; onEndReached: Function }> = ({
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
           <View style={styles.modelWrapper}>
-            {selected.preview && (
+            {selected?.preview && (
               <>
                 <View style={styles.header}>
-                  {selected.title && <Text>{selected.title}</Text>}
+                  {selected?.title && <Text>{selected?.title}</Text>}
                   <TouchableOpacity
                     onPress={closePopup}
                     style={styles.closeButton}>

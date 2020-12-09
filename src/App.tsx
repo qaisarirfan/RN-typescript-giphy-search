@@ -49,11 +49,14 @@ const App = () => {
             style={styles.searchInput}
             returnKeyType="search"
             onSubmitEditing={handleChange}
-            onChangeText={text => setQuery(text)}
+            onChangeText={(text) => setQuery(text)}
             value={query}
           />
         </View>
-        <Items onEndReached={() => fetchNews(query, false)} onRefresh={handleChange} />
+        <Items
+          onEndReached={() => fetchNews(query, false)}
+          onRefresh={handleChange}
+        />
       </SafeAreaView>
     </>
   )
